@@ -3,7 +3,6 @@ pull_request_rules:
     conditions:
       - base=master
       - status-success=continuous-integration/travis-ci/pr
-      - "#approved-reviews-by>=0"
       - label!=work-in-progress
     actions:
       merge:
