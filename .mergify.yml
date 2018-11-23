@@ -1,15 +1,11 @@
-rules:
-  default:
-    protection:
-      required_pull_request_reviews:
-        required_approving_review_count: null
-      required_status_checks:
-        contexts:
-          - continuous-integration/travis-ci
-  branches:
-    automerge:
-      protection:
-        required_pull_request_reviews: null
-        required_status_checks:
-          contexts:
-            - continuous-integration/travis-ci
+pull_request_rules:
+  - name: automatic merge
+    conditions:
+      - base=master
+      - status-success=continuous-integration/travis-ci/pr
+      - "#approved-reviews-by>=0"
+      - label!=work-in-progress
+    actions:
+      merge:
+        strict: "smart"
+        method: rebase
